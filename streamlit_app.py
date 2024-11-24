@@ -45,27 +45,37 @@ Este dashboard permite introducir una secuencia de nucleótidos (ADN) para tradu
 en proteínas y contar la cantidad de cada una presente en la secuencia.
 """)
 
-# Entrada del usuario
-dna_input = st.text_area("Introduce la secuencia de ADN:", height=200)
+# Entrada del usuario: Secuencia 1
+st.subheader("Secuencia 1")
+dna_input1 = st.text_area("Introduce la primera secuencia de ADN:", height=100)
+
+# Entrada del usuario: Secuencia 2
+st.subheader("Secuencia 2")
+dna_input2 = st.text_area("Introduce la segunda secuencia de ADN:", height=100)
 
 # Procesamiento al pulsar el botón
-if st.button("Procesar"):
-    if dna_input:
-        # Quitar espacios y convertir a mayúsculas
-        dna_sequence = dna_input.replace(" ", "").upper()
+if st.button("Procesar Secuencias"):
+    if dna_input1 or dna_input2:  # Verifica que al menos una secuencia sea ingresada
+        for idx, dna_input in enumerate([dna_input1, dna_input2], start=1):
+            if dna_input:
+                # Quitar espacios y convertir a mayúsculas
+                dna_sequence = dna_input.replace(" ", "").upper()
 
-        # Validar que solo contenga caracteres válidos (A, T, C, G)
-        if all(base in "ATCG" for base in dna_sequence):
-            protein_sequence = translate_dna_to_protein(dna_sequence)
-            protein_counts = count_proteins(protein_sequence)
+                # Validar que solo contenga caracteres válidos (A, T, C, G)
+                if all(base in "ATCG" for base in dna_sequence):
+                    protein_sequence = translate_dna_to_protein(dna_sequence)
+                    protein_counts = count_proteins(protein_sequence)
 
-            # Mostrar resultados
-            st.subheader("Secuencia de proteínas traducida")
-            st.text(protein_sequence)
+                    # Mostrar resultados para la secuencia actual
+                    st.subheader(f"Resultados para la Secuencia {idx}")
+                    st.markdown("**Secuencia de proteínas traducida**")
+                    st.text(protein_sequence)
 
-            st.subheader("Conteo de proteínas")
-            st.write(dict(protein_counts))
-        else:
-            st.error("La secuencia contiene caracteres inválidos. Por favor, introduce solo A, T, C y G.")
+                    st.markdown("**Conteo de proteínas**")
+                    st.write(dict(protein_counts))
+                else:
+                    st.error(f"La secuencia {idx} contiene caracteres inválidos. Por favor, introduce solo A, T, C y G.")
+            else:
+                st.warning(f"No se ingresó la Secuencia {idx}.")
     else:
-        st.error("Por favor, introduce una secuencia de ADN.")
+        st.error("Por favor, introduce al menos una secuencia de ADN.")
