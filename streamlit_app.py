@@ -184,7 +184,7 @@ if st.button("Procesar Secuencias"):
                 "Comparación de Nucleótidos", "Nucleótidos", "Cantidad", 
                 color1="lightgreen", color2="lightblue"
             )
-            st.pyplot(nucleotide_fig)
+            st.write(nucleotide_fig)
             st.pyplot(nucleotide_fig)
 
             proteins_labels = sorted(set(results[0][1].keys()).union(results[1][1].keys()))
@@ -194,7 +194,7 @@ if st.button("Procesar Secuencias"):
                 "Comparación de Proteínas", "Proteínas", "Cantidad", 
                 color1="skyblue", color2="orange"
             )
-            st.pyplot(protein_fig)
+            st.write(protein_fig)
             st.pyplot(protein_fig)
         else:
             st.warning("Se necesitan dos secuencias válidas para generar gráficos apilados.")
