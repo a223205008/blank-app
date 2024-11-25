@@ -39,6 +39,10 @@ def translate_dna_to_protein(dna_sequence):
 def count_proteins(protein_sequence):
     return Counter(protein_sequence)
 
+# Función para contar los nucleótidos
+def count_nucleotides(dna_sequence):
+    return Counter(dna_sequence)
+
 # Función para crear un gráfico de barras
 def plot_protein_counts(protein_counts, title):
     fig, ax = plt.subplots()
@@ -91,6 +95,22 @@ if st.button("Procesar Secuencias"):
                     protein_sequence = translate_dna_to_protein(dna_sequence)
                     protein_counts = count_proteins(protein_sequence)
 
+                    # Conteo de nucleótidos
+                    nucleotide_counts = count_nucleotides(dna_sequence)
+                    st.markdown("**Conteo de Nucleótidos**")
+                    st.write(dict(nucleotide_counts))
+
+                    # Gráfico de barras para nucleótidos
+                    st.markdown("**Gráfico de barras del conteo de nucleótidos**")
+                    nucleotide_fig = plot_counts(
+                        nucleotide_counts, 
+                        f"Conteo de Nucleótidos (Secuencia {idx})", 
+                        "Nucleótidos", 
+                        "Cantidad",
+                        color="lightgreen"
+                    )
+                    st.pyplot(nucleotide_fig)
+                    
                     # Mostrar resultados para la secuencia actual
                     st.subheader(f"Resultados para la Secuencia {idx}")
                     st.markdown("**Secuencia de proteínas traducida**")
