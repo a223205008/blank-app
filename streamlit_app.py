@@ -183,4 +183,4 @@ if len(results) == 2:
     "Comparación de Proteínas", "Proteínas", "Cantidad", 
     color1="skyblue", color2="orange"
             )
-    st.pyplot(protein_fig
+    st.pyplot(protein_fig)
