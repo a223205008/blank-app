@@ -190,14 +190,14 @@ if st.button("Procesar Secuencias"):
                 st.write(dict(nucleotide_counts))
 
                 st.markdown("**Gráfica de Nucleótidos**")
-                    fig = plot_single_bar(
-                        nucleotide_counts,
-                        "Conteo de Nucleótidos",
-                        "Nucleótidos",
-                        "Cantidad",
-                        color="lightblue"
-                    )
-                    st.pyplot(fig)
+                fig = plot_single_bar(
+                    nucleotide_counts,
+                    "Conteo de Nucleótidos",
+                    "Nucleótidos",
+                    "Cantidad",
+                    color="lightblue"
+                )
+                st.pyplot(fig)
 
                 elif view_option == "Proteínas":
                     st.subheader(f"Proteínas en la Secuencia {idx}")
