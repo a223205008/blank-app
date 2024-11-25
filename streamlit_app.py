@@ -98,6 +98,12 @@ if st.button("Procesar Secuencias"):
 
                     st.markdown("**Conteo de proteínas**")
                     st.write(dict(protein_counts))
+
+                    # Mostrar el gráfico de barras
+                    st.markdown("**Gráfico de barras del conteo de proteínas**")
+                    fig = plot_protein_counts(protein_counts, f"Secuencia {idx}")
+                    st.pyplot(fig)
+                    
                 else:
                     st.error(f"La secuencia {idx} contiene caracteres inválidos. Por favor, introduce solo A, T, C y G.")
             else:
