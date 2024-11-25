@@ -158,7 +158,13 @@ if st.button("Procesar Secuencias"):
                     st.markdown("**Gráfico de barras del conteo de proteínas**")
                     fig = plot_protein_counts(protein_counts, f"Secuencia {idx}")
                     st.pyplot(fig)
-
+                    
+                    # Traducción a proteínas
+                    protein_sequence = translate_dna_to_protein(dna_sequence)
+                    protein_counts = count_proteins(protein_sequence)
+                    st.markdown("**Conteo de Proteínas**")
+                    st.write(dict(protein_counts))
+                    
                     # Guarda los resultados
                     results.append((nucleotide_counts, protein_counts))
                 
