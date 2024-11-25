@@ -116,10 +116,16 @@ dna_input1 = st.text_area("Introduce la primera secuencia de ADN:", height=100)
 st.subheader("Secuencia 2")
 dna_input2 = st.text_area("Introduce la segunda secuencia de ADN:", height=100)
 
+# Sidebar para seleccionar qué visualizar
+view_option = st.sidebar.selectbox(
+    "Selecciona qué visualizar:",
+    ("Nucleótidos", "Proteínas")
+)
+
 # Procesamiento al pulsar el botón
 if st.button("Procesar Secuencias"):
+    results = []
     if dna_input1 or dna_input2:  # Verifica que al menos una secuencia sea ingresada
-        results = []
         for idx, dna_input in enumerate([dna_input1, dna_input2], start=1):
             if dna_input:
                 # Quitar espacios y convertir a mayúsculas
@@ -174,6 +180,39 @@ if st.button("Procesar Secuencias"):
                 st.warning(f"No se ingresó la Secuencia {idx}.")
     else:
         st.error("Por favor, introduce al menos una secuencia de ADN.")
+
+        # Visualización según la opción seleccionada
+    if results:
+        for idx, (nucleotide_counts, protein_counts) in enumerate(results, start=1):
+            if view_option == "Nucleótidos":
+                st.subheader(f"Nucleótidos en la Secuencia {idx}")
+                st.markdown("**Conteo de Nucleótidos**")
+                st.write(dict(nucleotide_counts))
+
+                st.markdown("**Gráfica de Nucleótidos**")
+                    fig = plot_single_bar(
+                        nucleotide_counts,
+                        "Conteo de Nucleótidos",
+                        "Nucleótidos",
+                        "Cantidad",
+                        color="lightblue"
+                    )
+                    st.pyplot(fig)
+
+                elif view_option == "Proteínas":
+                    st.subheader(f"Proteínas en la Secuencia {idx}")
+                    st.markdown("**Conteo de Proteínas**")
+                    st.write(dict(protein_counts))
+
+                    st.markdown("**Gráfica de Proteínas**")
+                    fig = plot_single_bar(
+                        protein_counts,
+                        "Conteo de Proteínas",
+                        "Proteínas",
+                        "Cantidad",
+                        color="orange"
+                    )
+                    st.pyplot(fig)
         
          # Gráficas apiladas (si ambas secuencias son válidas)
         if len(results) == 2:
@@ -184,7 +223,7 @@ if st.button("Procesar Secuencias"):
                 "Comparación de Nucleótidos", "Nucleótidos", "Cantidad", 
                 color1="lightgreen", color2="lightblue"
             )
-            st.write(nucleotide_fig)
+            st.write("Figura de nucléotidos:", nucleotide_fig)
             st.pyplot(nucleotide_fig)
 
             proteins_labels = sorted(set(results[0][1].keys()).union(results[1][1].keys()))
@@ -194,7 +233,7 @@ if st.button("Procesar Secuencias"):
                 "Comparación de Proteínas", "Proteínas", "Cantidad", 
                 color1="skyblue", color2="orange"
             )
-            st.write(protein_fig)
+            st.write("Figura de proteínas:", protein_fig)
             st.pyplot(protein_fig)
         else:
             st.warning("Se necesitan dos secuencias válidas para generar gráficos apilados.")
