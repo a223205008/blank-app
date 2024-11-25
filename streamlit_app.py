@@ -199,20 +199,20 @@ if st.button("Procesar Secuencias"):
                 )
                 st.pyplot(fig)
 
-                elif view_option == "Proteínas":
-                    st.subheader(f"Proteínas en la Secuencia {idx}")
-                    st.markdown("**Conteo de Proteínas**")
-                    st.write(dict(protein_counts))
+            elif view_option == "Proteínas":
+                st.subheader(f"Proteínas en la Secuencia {idx}")
+                st.markdown("**Conteo de Proteínas**")
+                st.write(dict(protein_counts))
 
-                    st.markdown("**Gráfica de Proteínas**")
-                    fig = plot_single_bar(
-                        protein_counts,
-                        "Conteo de Proteínas",
-                        "Proteínas",
-                        "Cantidad",
-                        color="orange"
-                    )
-                    st.pyplot(fig)
+                st.markdown("**Gráfica de Proteínas**")
+                fig = plot_single_bar(
+                    protein_counts,
+                    "Conteo de Proteínas",
+                    "Proteínas",
+                    "Cantidad",
+                    color="orange"
+                )
+                st.pyplot(fig)
         
          # Gráficas apiladas (si ambas secuencias son válidas)
         if len(results) == 2:
