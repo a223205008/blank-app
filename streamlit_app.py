@@ -154,37 +154,37 @@ if st.button("Procesar Secuencias"):
         st.error("Por favor, introduce al menos una secuencia de ADN.")
 
         # Visualización según la opción seleccionada
-    if results:
-        for idx, (nucleotide_counts, protein_counts) in enumerate(results, start=1):
-            if view_option == "Nucleótidos":
-                st.subheader(f"Nucleótidos en la Secuencia {idx}")
-                st.markdown("**Conteo de Nucleótidos**")
-                st.write(dict(nucleotide_counts))
+        if results:
+            for idx, (nucleotide_counts, protein_counts) in enumerate(results, start=1):
+                if view_option == "Nucleótidos":
+                    st.subheader(f"Nucleótidos en la Secuencia {idx}")
+                    st.markdown("**Conteo de Nucleótidos**")
+                    st.write(dict(nucleotide_counts))
 
-                st.markdown("**Gráfica de Nucleótidos**")
-                fig = plot_single_bar(
-                    nucleotide_counts,
-                    "Conteo de Nucleótidos",
-                    "Nucleótidos",
-                    "Cantidad",
-                    color="lightblue"
-                )
-                st.pyplot(fig)
+                    st.markdown("**Gráfica de Nucleótidos**")
+                    fig = plot_single_bar(
+                        nucleotide_counts,
+                        "Conteo de Nucleótidos",
+                        "Nucleótidos",
+                        "Cantidad",
+                        color="lightblue"
+                    )
+                    st.pyplot(fig)
 
-            elif view_option == "Proteínas":
-                st.subheader(f"Proteínas en la Secuencia {idx}")
-                st.markdown("**Conteo de Proteínas**")
-                st.write(dict(protein_counts))
+                elif view_option == "Proteínas":
+                    st.subheader(f"Proteínas en la Secuencia {idx}")
+                    st.markdown("**Conteo de Proteínas**")
+                    st.write(dict(protein_counts))
 
-                st.markdown("**Gráfica de Proteínas**")
-                fig = plot_single_bar(
-                    protein_counts,
-                    "Conteo de Proteínas",
-                    "Proteínas",
-                    "Cantidad",
-                    color="orange"
-                )
-                st.pyplot(fig)
+                    st.markdown("**Gráfica de Proteínas**")
+                    fig = plot_single_bar(
+                        protein_counts,
+                        "Conteo de Proteínas",
+                        "Proteínas",
+                        "Cantidad",
+                        color="orange"
+                    )
+                    st.pyplot(fig)
         
          # Gráficas apiladas (si ambas secuencias son válidas)
         if len(results) == 2:
