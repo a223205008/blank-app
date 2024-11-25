@@ -118,6 +118,7 @@ dna_input2 = st.text_area("Introduce la segunda secuencia de ADN:", height=100)
 
 # Procesamiento al pulsar el botón
 if st.button("Procesar Secuencias"):
+    results = []
     if dna_input1 or dna_input2:  # Verifica que al menos una secuencia sea ingresada
         for idx, dna_input in enumerate([dna_input1, dna_input2], start=1):
             if dna_input:
