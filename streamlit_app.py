@@ -1,5 +1,6 @@
 import streamlit as st
 import matplotlib.pyplot as plt
+import numpy as np
 from collections import Counter
 
 # Diccionario del código genético
@@ -65,6 +66,27 @@ def plot_counts(counts, title, xlabel, ylabel, color='skyred'):
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
     ax.set_title(title)
+    return fig
+
+# Función para crear un gráfico de barras apiladas
+def plot_stacked_bar(data1, data2, labels, title, xlabel, ylabel, color1='skyblue', color2='orange'):
+    fig, ax = plt.subplots()
+    indices = np.arange(len(labels))
+    
+    # Obtener valores
+    values1 = [data1.get(label, 0) for label in labels]
+    values2 = [data2.get(label, 0) for label in labels]
+    
+    # Gráficas apiladas
+    ax.bar(indices, values1, color=color1, label='Secuencia 1')
+    ax.bar(indices, values2, bottom=values1, color=color2, label='Secuencia 2')
+    
+    ax.set_xticks(indices)
+    ax.set_xticklabels(labels)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    ax.set_title(title)
+    ax.legend()
     return fig
 
 # Configuración de Streamlit
@@ -142,3 +164,23 @@ if st.button("Procesar Secuencias"):
                 st.warning(f"No se ingresó la Secuencia {idx}.")
     else:
         st.error("Por favor, introduce al menos una secuencia de ADN.")
+        
+# Gráficas apiladas (si ambas secuencias son válidas)
+if len(results) == 2:
+    nucleotides_labels = sorted(set(results[0][0].keys()).union(results[1][0].keys()))
+    st.markdown("### Gráfico de Barras Apiladas - Nucleótidos")
+    nucleotide_fig = plot_stacked_bar(
+    results[0][0], results[1][0], nucleotides_labels, 
+    "Comparación de Nucleótidos", "Nucleótidos", "Cantidad", 
+    color1="lightgreen", color2="lightblue"
+            )
+    st.pyplot(nucleotide_fig)
+
+    proteins_labels = sorted(set(results[0][1].keys()).union(results[1][1].keys()))
+    st.markdown("### Gráfico de Barras Apiladas - Proteínas")
+    protein_fig = plot_stacked_bar(
+    results[0][1], results[1][1], proteins_labels, 
+    "Comparación de Proteínas", "Proteínas", "Cantidad", 
+    color1="skyblue", color2="orange"
+            )
+            st.pyplot(protein_fig
