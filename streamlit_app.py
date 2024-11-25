@@ -157,7 +157,27 @@ if st.button("Procesar Secuencias"):
                     st.markdown("**Gráfico de barras del conteo de proteínas**")
                     fig = plot_protein_counts(protein_counts, f"Secuencia {idx}")
                     st.pyplot(fig)
-                    
+
+                    # Gráficas apiladas (si ambas secuencias son válidas)
+                if len(results) == 2:
+                    nucleotides_labels = sorted(set(results[0][0].keys()).union(results[1][0].keys()))
+                    st.markdown("### Gráfico de Barras Apiladas - Nucleótidos")
+                    nucleotide_fig = plot_stacked_bar(
+                        results[0][0], results[1][0], nucleotides_labels, 
+                        "Comparación de Nucleótidos", "Nucleótidos", "Cantidad", 
+                        color1="lightgreen", color2="lightblue"
+                    )
+                    st.pyplot(nucleotide_fig)
+
+                    proteins_labels = sorted(set(results[0][1].keys()).union(results[1][1].keys()))
+                    st.markdown("### Gráfico de Barras Apiladas - Proteínas")
+                    protein_fig = plot_stacked_bar(
+                        results[0][1], results[1][1], proteins_labels, 
+                        "Comparación de Proteínas", "Proteínas", "Cantidad", 
+                        color1="skyblue", color2="orange"
+                    )
+                    st.pyplot(protein_fig)
+                
                 else:
                     st.error(f"La secuencia {idx} contiene caracteres inválidos. Por favor, introduce solo A, T, C y G.")
             else:
@@ -165,22 +185,3 @@ if st.button("Procesar Secuencias"):
     else:
         st.error("Por favor, introduce al menos una secuencia de ADN.")
         
-        # Gráficas apiladas (si ambas secuencias son válidas)
-        if len(results) == 2:
-            nucleotides_labels = sorted(set(results[0][0].keys()).union(results[1][0].keys()))
-            st.markdown("### Gráfico de Barras Apiladas - Nucleótidos")
-            nucleotide_fig = plot_stacked_bar(
-                results[0][0], results[1][0], nucleotides_labels, 
-                "Comparación de Nucleótidos", "Nucleótidos", "Cantidad", 
-                color1="lightgreen", color2="lightblue"
-            )
-            st.pyplot(nucleotide_fig)
-
-            proteins_labels = sorted(set(results[0][1].keys()).union(results[1][1].keys()))
-            st.markdown("### Gráfico de Barras Apiladas - Proteínas")
-            protein_fig = plot_stacked_bar(
-                results[0][1], results[1][1], proteins_labels, 
-                "Comparación de Proteínas", "Proteínas", "Cantidad", 
-                color1="skyblue", color2="orange"
-            )
-            st.pyplot(protein_fig)
