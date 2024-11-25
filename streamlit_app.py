@@ -43,7 +43,7 @@ def count_proteins(protein_sequence):
 def count_nucleotides(dna_sequence):
     return Counter(dna_sequence)
 
-# Función para crear un gráfico de barras
+# Función para crear un gráfico de barras proteínas
 def plot_protein_counts(protein_counts, title):
     fig, ax = plt.subplots()
     proteins = list(protein_counts.keys())
@@ -52,6 +52,18 @@ def plot_protein_counts(protein_counts, title):
     ax.bar(proteins, counts, color='skyblue')
     ax.set_xlabel("Tipo de Proteína")
     ax.set_ylabel("Cantidad")
+    ax.set_title(title)
+    return fig
+
+# Función para crear un gráfico de barras nucleótidos
+def plot_counts(counts, title, xlabel, ylabel, color='skyred'):
+    fig, ax = plt.subplots()
+    labels = list(counts.keys())
+    values = list(counts.values())
+    
+    ax.bar(labels, values, color=color)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
     ax.set_title(title)
     return fig
 
