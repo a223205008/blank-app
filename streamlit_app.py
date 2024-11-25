@@ -69,13 +69,13 @@ def plot_counts(counts, title, xlabel, ylabel, color='skyred'):
     return fig
 
 # Función para crear un gráfico de barras apiladas
-def plot_stacked_bar(data1, data2, labels, title, xlabel, ylabel, color1='skyblue', color2='orange'):
+def plot_stacked_bar(dna_input1, dna_input2, labels, title, xlabel, ylabel, color1='skyblue', color2='orange'):
     fig, ax = plt.subplots()
     indices = np.arange(len(labels))
     
     # Obtener valores
-    values1 = [data1.get(label, 0) for label in labels]
-    values2 = [data2.get(label, 0) for label in labels]
+    values1 = [dna_input1.get(label, 0) for label in labels]
+    values2 = [dna_input2.get(label, 0) for label in labels]
     
     # Gráficas apiladas
     ax.bar(indices, values1, color=color1, label='Secuencia 1')
