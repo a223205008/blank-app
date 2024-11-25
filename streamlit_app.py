@@ -1,4 +1,5 @@
 import streamlit as st
+import matplotlib.pyplot as plt
 from collections import Counter
 
 # Diccionario del código genético
@@ -37,6 +38,18 @@ def translate_dna_to_protein(dna_sequence):
 # Función para contar las proteínas
 def count_proteins(protein_sequence):
     return Counter(protein_sequence)
+
+# Función para crear un gráfico de barras
+def plot_protein_counts(protein_counts, title):
+    fig, ax = plt.subplots()
+    proteins = list(protein_counts.keys())
+    counts = list(protein_counts.values())
+    
+    ax.bar(proteins, counts, color='skyblue')
+    ax.set_xlabel("Tipo de Proteína")
+    ax.set_ylabel("Cantidad")
+    ax.set_title(title)
+    return fig
 
 # Configuración de Streamlit
 st.title("Dashboard de Traducción de ADN a Proteínas")
