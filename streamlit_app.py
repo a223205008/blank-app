@@ -58,6 +58,18 @@ Este dashboard permite introducir una secuencia de nucleótidos (ADN) para tradu
 en proteínas y contar la cantidad de cada una presente en la secuencia.
 """)
 
+st.sidebar.title("Conceptos")
+st.sidebar.write("""
+**Proteínas**: Las proteínas son moléculas formadas por cadenas de aminoácidos, que a su vez son codificadas por las secuencias de ADN. Estas proteínas realizan una variedad de funciones dentro de las células, como enzimas, estructuras y señales.
+
+**Nucleótidos**: Los nucleótidos son las unidades básicas del ADN. Cada nucleótido está formado por un azúcar, un fosfato y una base nitrogenada (adenina, timina, citosina o guanina). Las secuencias de nucleótidos en el ADN determinan la información genética que codifica para las proteínas.
+
+**Similitud Genética**: Los seres vivos comparten un alto grado de similitud genética en sus secuencias de ADN. Esta similitud se refleja en las secuencias de proteínas que producen. Las pequeñas diferencias genéticas entre especies pueden dar lugar a las diversas características y funciones biológicas que los hacen únicos, pero la mayor parte del ADN es común entre organismos cercanamente relacionados.
+""")
+
+# Incluir una imagen relacionada con genética
+st.sidebar.image("https://images.my.labster.com/632b09d9-12b5-4bc1-937e-86b46c085d23/Codon_circle.es_ES.png")
+
 # Entrada del usuario: Secuencia 1
 st.subheader("Secuencia 1")
 dna_input1 = st.text_area("Introduce la primera secuencia de ADN:", height=100)
